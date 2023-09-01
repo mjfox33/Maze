@@ -9,38 +9,21 @@ namespace Maze
 {
     public class PolarGrid : Grid<PolarCell>
     {
-        public override int LinkedCells => EachCell.Count(x => x != null && x.Links.Any());
-
-        public override IEnumerable<PolarCell> DeadEnds => EachCell.Where(x => x != null && x.Links.Count == 1);
-
-        public override List<List<PolarCell>> Cells { get; }
-
-        public override IEnumerable<IEnumerable<PolarCell>> EachRow => Cells;
-
-        public override IEnumerable<PolarCell> EachCell
-        {
-            get
-            {
-                return Cells.SelectMany(x => x.ToArray());
-            }
-        }
-
         public PolarGrid(int rows, int columns) : base (rows, columns)
         {
-            Cells = PrepareGrid();
+            PrepareGrid();
             ConfigureCells();
         }
 
-        private List<List<PolarCell>> PrepareGrid()
+        private void PrepareGrid()
         {
-            var rows = new List<List<PolarCell>>();
             var rowHeight = 1.0 / Rows;
-            rows.Add(new List<PolarCell>() { new PolarCell(0, 0) });
+            Cells.Add(new List<PolarCell>() { new PolarCell(0, 0) });
 
             for (var row = 1; row < Rows; row++)
             {
                 var circumference = 2.0 * Math.PI * row / Rows;
-                var previousCount = rows[row - 1].Count;
+                var previousCount = Cells[row - 1].Count;
                 var estimatedWidth = circumference / previousCount;
                 var ratio = Convert.ToInt32(Math.Round(estimatedWidth / rowHeight, 0));
                 var cells = previousCount * ratio;
@@ -49,9 +32,8 @@ namespace Maze
                 {
                     thisRow.Add(new PolarCell(row, i));
                 }
-                rows.Add(thisRow);
+                Cells.Add(thisRow);
             }
-            return rows;
         }
 
         private void ConfigureCells()

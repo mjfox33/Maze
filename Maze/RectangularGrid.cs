@@ -9,31 +9,14 @@ namespace Maze
 {
     public class RectangularGrid : Grid<RectangularCell>
     {
-        public override int LinkedCells => EachCell.Count(x => x != null && x.Links.Any());
-
-        public override IEnumerable<RectangularCell> DeadEnds => EachCell.Where(x => x != null && x.Links.Count == 1);
-
-        public override List<List<RectangularCell>> Cells { get; }
-
-        public override IEnumerable<RectangularCell> EachCell
-        {
-            get
-            {
-                return Cells.SelectMany(x => x.ToArray());
-            }
-        }
-
-        public override IEnumerable<IEnumerable<RectangularCell>> EachRow => Cells;
-
         public RectangularGrid(int rows, int columns) : base(rows, columns)
         {
-            Cells = PrepareGrid();
+            PrepareGrid();
             ConfigureCells();
         }
 
-        private List<List<RectangularCell>> PrepareGrid()
+        private void PrepareGrid()
         {
-            var result = new List<List<RectangularCell>>();
             for (var row = 0; row < Rows; row++)
             {
                 var temp = new List<RectangularCell>();
@@ -41,9 +24,8 @@ namespace Maze
                 {
                     temp.Add(new RectangularCell(row, col));
                 }
-                result.Add(temp);
+                Cells.Add(temp);
             }
-            return result;
         }
 
         protected void ConfigureCells()
@@ -57,16 +39,6 @@ namespace Maze
                 cell.South = this[row + 1, col];
                 cell.West = this[row, col - 1];
                 cell.East = this[row, col + 1];
-            }
-        }
-
-        public override RectangularCell this[int row, int col]
-        {
-            get
-            {
-                if (row < 0 || row > Rows - 1) return null;
-                if (col < 0 || col > Columns - 1) return null;
-                return Cells[row][col];
             }
         }
 

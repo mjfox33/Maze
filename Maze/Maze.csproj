@@ -44,9 +44,10 @@
   <ItemGroup>
     <Compile Include="Algorithm.cs" />
     <Compile Include="Cell.cs" />
-    <Compile Include="ColoredGrid.cs" />
     <Compile Include="Distances.cs" />
     <Compile Include="Grid.cs" />
+    <Compile Include="HexCell.cs" />
+    <Compile Include="HexGrid.cs" />
     <Compile Include="Mask.cs" />
     <Compile Include="MaskedGrid.cs" />
     <Compile Include="PolarCell.cs" />
@@ -54,6 +55,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RectangularCell.cs" />
     <Compile Include="RectangularGrid.cs" />
+    <Compile Include="TriangleCell.cs" />
+    <Compile Include="TriangleGrid.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

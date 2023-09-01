@@ -11,6 +11,7 @@ namespace Maze
         private static readonly Random RandomNumberGenerator = new Random();
 
         #region Biased Algorithms
+        // todo: make these generic - this will require forcing Cell<T> to require complex implementations of cell to know their east or north neighbor for example
         public static void BinaryTree(RectangularGrid grid)
         {
             foreach (var cell in grid.EachCell)
@@ -68,7 +69,7 @@ namespace Maze
 
         #region Unbiased Algorithms
 
-        public static void AldousBroder(RectangularGrid grid, RectangularCell startCell = null)
+        public static void AldousBroder<T>(Grid<T> grid, T startCell = default(T)) where T : Cell<T>
         {
             var cell = startCell ?? grid.RandomCell;
             var unvisited = grid.Size - 1;
@@ -87,16 +88,16 @@ namespace Maze
             }
         }
 
-        public static void Wilson(RectangularGrid grid)
+        public static void Wilson<T>(Grid<T> grid) where T: Cell<T>
         {
-            var unvisited = new HashSet<RectangularCell>(grid.EachCell);
+            var unvisited = new HashSet<T>(grid.EachCell);
             var first = unvisited.ElementAt(RandomNumberGenerator.Next(unvisited.Count));
             unvisited.Remove(first);
 
             while (unvisited.Any())
             {
                 var cell = unvisited.ElementAt(RandomNumberGenerator.Next(unvisited.Count));
-                var path = new List<RectangularCell> { cell };
+                var path = new List<T> { cell };
 
                 while (unvisited.Contains(cell))
                 {
@@ -122,14 +123,15 @@ namespace Maze
 
         }
 
-        public static void HuntAndKill(RectangularGrid grid, RectangularCell startCell = null)
+        
+        public static void HuntAndKill<T>(Grid<T> grid, T startCell = default(T)) where T : Cell<T>
         {
-            var current =startCell ?? grid.RandomCell;
-            
+            var current = startCell ?? grid.RandomCell;
+
             while (current != null)
             {
                 var unvisitedNeighbors = current.Neighbors.Where(x => !x.Links.Any()).ToArray();
-                RectangularCell neighbor;
+                T neighbor;
 
                 if (unvisitedNeighbors.Any())
                 {
@@ -156,33 +158,16 @@ namespace Maze
             }
         }
 
-        public static void RecursiveBacktracker(RectangularGrid grid, RectangularCell startCell = null)
+        /*
+         * This just depends on each cell knowing the following:
+         * who neighbors them
+         * if that neighbor has any links
+         * the ability to link the current cell to one of the neighbors
+        */
+        public static void RecursiveBacktracker<T>(Grid<T> grid, T startCell = default(T)) where T : Cell<T> 
         {
             var currentCell = startCell ?? grid.RandomCell;
-            var stack = new Stack<RectangularCell>();
-            stack.Push(currentCell);
-
-            while (stack.Any())
-            {
-                currentCell = stack.Peek();
-                var neighbors = currentCell.Neighbors.Where(x => !x.Links.Any()).ToArray();
-                if (neighbors.Any())
-                {
-                    var neighbor = neighbors.ElementAt(RandomNumberGenerator.Next(neighbors.Length));
-                    currentCell.Link(neighbor);
-                    stack.Push(neighbor);
-                }
-                else
-                {
-                    stack.Pop();
-                }
-            }
-        }
-
-        public static void RecursiveBacktracker(PolarGrid grid, PolarCell startCell = null)
-        {
-            var currentCell = startCell ?? grid.RandomCell;
-            var stack = new Stack<PolarCell>();
+            var stack = new Stack<T>();
             stack.Push(currentCell);
 
             while (stack.Any())

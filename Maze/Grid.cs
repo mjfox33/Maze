@@ -7,29 +7,64 @@ using System.Drawing;
 
 namespace Maze
 {
-    public abstract class Grid<T>
+    public abstract class Grid<T> where T : Cell<T>
     {
         public int Rows { get; }
         public int Columns { get; }
         public virtual int Size => Rows * Columns;
-        public abstract int LinkedCells { get; }
+        public int LinkedCells => EachCell.Count(x => x != null && x.Links.Any());
+        public IEnumerable<T> DeadEnds => EachCell.Where(x => x != null && x.Links.Count == 1);
+        public List<List<T>> Cells { get; }
+        public IEnumerable<T> EachCell => Cells.SelectMany(x => x.ToArray());
+        public IEnumerable<IEnumerable<T>> EachRow => Cells;
 
-        public abstract IEnumerable<T> DeadEnds { get; }
+        public string ContentsOfCell(Cell<T> cell)
+        {
+            return Distances != null && Distances[cell] >= 0 ? Distances[cell].ToString("x3") : "   ";
+        }
 
-        public abstract List<List<T>> Cells { get; }
+        private Distances<T> _distances;
+        public Distances<T> Distances
+        {
+            get => _distances;
+            set
+            {
+                var maxCellAndDistance = value.MaxCellAndDistance;
+                _maximumDistance = maxCellAndDistance.Item2;
+                _distances = value;
+            }
+        }
+
+        private int _maximumDistance;
+
+        public Color? BackgroundColorForCell(Cell<T> cell)
+        {
+            var distance = Distances[cell];
+            var intensity = Convert.ToDouble(_maximumDistance - distance) / _maximumDistance;
+            var dark = (int)Math.Ceiling(255 * intensity);
+            var light = (int)Math.Ceiling(128 + 127 * intensity);
+            return Color.FromArgb(dark, dark, light);
+        }
+
 
         protected readonly Random RandomNumberGenerator = new Random();
-
-        public virtual Distances<T> Distances { get; set; }
 
         protected Grid(int rows, int columns)
         {
             Rows = rows;
             Columns = columns;
+            Cells = new List<List<T>>();
         }
-        
 
-        public abstract T this[int row, int col] { get; }
+        public virtual T this[int row, int col] 
+        {
+            get
+            {
+                if (row < 0 || row > Rows - 1) return null;
+                if (col < 0 || col > Columns - 1) return null;
+                return Cells[row][col];
+            }
+        }
 
         public virtual T RandomCell
         {
@@ -41,24 +76,9 @@ namespace Maze
             }
         }
 
-        public abstract IEnumerable<T> EachCell { get; }
-
-        public abstract IEnumerable<IEnumerable<T>> EachRow { get; }
-
-        public string ContentsOfCell(Cell<T> cell)
-        {
-            return Distances != null && Distances[cell] >= 0 ? Distances[cell].ToString("x3") : "   ";
-        }
-
-        public virtual Color? BackgroundColorForCell(Cell<T> cell)
-        {
-            return null;
-        }
-
         public abstract Image ToImage(int cellSize = 1, bool useBackgrounds = false);
 
-
-
+        
     }
 }
 

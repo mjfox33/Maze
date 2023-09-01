@@ -8,6 +8,7 @@ namespace Maze
 {
     public abstract class Cell<T>
     {
+        protected Cell() { }
         protected Cell(int row, int column)
         {
             Row = row;
