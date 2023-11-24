@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Maze.Cell&lt;T&gt;">
+    <Position X="12" Y="9.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEACAAQBAAAAAAAAAAgBAKAAEQAAAAAA=</HashCode>
+      <FileName>Cell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Maze.RectangularCell">
+    <Position X="6.25" Y="13.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAACAAQAAAAAAEAAAAAAAKAAAAAABAAQ=</HashCode>
+      <FileName>RectangularCell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Maze.HexCell">
+    <Position X="14.5" Y="13.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>ACCCABABAAAAAACAAQAAAAAAEAAAAAAAKAAAAAAAAAA=</HashCode>
+      <FileName>HexCell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Maze.PolarCell">
+    <Position X="18.25" Y="13.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAEAAQAAACAAUAAAAAAAAAAAAAAKAAAAAAAAAA=</HashCode>
+      <FileName>PolarCell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Maze.TriangleCell">
+    <Position X="10.5" Y="13.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAACAAQAAAAAAEAAAAIAAKAAAAAABAAQ=</HashCode>
+      <FileName>TriangleCell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Maze.Grid&lt;T&gt;">
+    <Position X="8.25" Y="0.5" Width="4" />
+    <NestedTypes>
+      <Enum Name="Maze.Grid&lt;T&gt;.CellBorderWidth" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Grid.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIQEAgEgACAMAQACAAAAAAAJIAEAAQAgAAAA=</HashCode>
+      <FileName>Grid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Maze.RectangularGrid">
+    <Position X="0.5" Y="6.25" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAQEAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>RectangularGrid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Maze.TriangleGrid">
+    <Position X="5.5" Y="6.25" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAQAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>TriangleGrid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Maze.HexGrid">
+    <Position X="10.5" Y="6.25" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAQAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>HexGrid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Maze.PolarGrid">
+    <Position X="15.5" Y="6.25" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAQACAAAAAAAAAAAAAAgAAAAQAAAAAA=</HashCode>
+      <FileName>PolarGrid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Maze.Distances&lt;T&gt;">
+    <Position X="0.5" Y="18.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAACAACAIAAAAEAgAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Distances.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Maze.MaskedGrid">
+    <Position X="1.25" Y="9" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAgAAAAAAAAAAAAAAAAAAAAACAQAAAAAA=</HashCode>
+      <FileName>MaskedGrid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Maze.Mask">
+    <Position X="4.25" Y="18.25" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEBEEAACAAAAAQAAAAAIAAAAADAAAgAAAI=</HashCode>
+      <FileName>Mask.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Maze.GridTranslator">
+    <Position X="8.25" Y="18.25" Width="5.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Maze.GridTranslator.GridType">
+        <TypeIdentifier>
+          <NewMemberFileName>GridTranslator.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="Maze.GridTranslator.RectangularCellWallMask">
+        <TypeIdentifier>
+          <NewMemberFileName>GridTranslator.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="Maze.GridTranslator.TriangularCellWallMask">
+        <TypeIdentifier>
+          <NewMemberFileName>GridTranslator.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="Maze.GridTranslator.HexagonCellWallMask">
+        <TypeIdentifier>
+          <NewMemberFileName>GridTranslator.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Struct Name="Maze.GridTranslator.GridDefinitionTypeAndWalls">
+        <TypeIdentifier>
+          <NewMemberFileName>GridTranslator.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAEEAAAAAAAAAgAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GridTranslator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Maze.Algorithm">
+    <Position X="14" Y="18.25" Width="5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAEAAAiAAAAAAAAAAAAAAAAAUAAAAAAAAQA=</HashCode>
+      <FileName>Algorithm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

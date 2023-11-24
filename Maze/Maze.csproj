@@ -46,6 +46,7 @@
     <Compile Include="Cell.cs" />
     <Compile Include="Distances.cs" />
     <Compile Include="Grid.cs" />
+    <Compile Include="GridTranslator.cs" />
     <Compile Include="HexCell.cs" />
     <Compile Include="HexGrid.cs" />
     <Compile Include="Mask.cs" />
@@ -57,6 +58,9 @@
     <Compile Include="RectangularGrid.cs" />
     <Compile Include="TriangleCell.cs" />
     <Compile Include="TriangleGrid.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

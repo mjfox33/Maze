@@ -76,9 +76,15 @@ namespace Maze
             }
         }
 
-        public abstract Image ToImage(int cellSize = 1, bool useBackgrounds = false);
+        public abstract Image ToImage(int cellSize = 10, CellBorderWidth cellBorderWidth = CellBorderWidth.Normal, bool useBackgrounds = false);
 
-        
+        public enum CellBorderWidth
+        {
+            None = 0,
+            Thin = 1 << 0,
+            Normal = 1 << 1,
+            Thick = 1 << 2,
+        }
     }
 }
 

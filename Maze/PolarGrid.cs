@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -74,7 +75,7 @@ namespace Maze
         }
 
 
-        public override Image ToImage(int cellSize = 1, bool useBackgrounds = false)
+        public override Image ToImage(int cellSize = 10, CellBorderWidth cellBorderWidth = CellBorderWidth.Normal, bool useBackgrounds = false)
         {
             var size = 2 * Rows * cellSize;
             var img = new Bitmap(size + 1, size + 1);
@@ -85,7 +86,24 @@ namespace Maze
                 var center = size / 2;
 
                 //todo: make pen width variable base on image size and cell size
-                var pen = new Pen(Color.Black, 4);
+                int penSize;
+                switch (cellBorderWidth)
+                {
+                    case CellBorderWidth.Normal:
+                        penSize = cellSize / 10;
+                        break;
+                    case CellBorderWidth.Thick:
+                        penSize = cellSize / 5;
+                        break;
+                    case CellBorderWidth.Thin:
+                        penSize = 1;
+                        break;
+                    default:
+                        penSize = cellSize / 10;
+                        break;
+                }
+                //var penSize = cellSize / 10;
+                var pen = new Pen(Color.Black, penSize);
                 foreach (var cell in EachCell)
                 {
                     if (cell == null || cell.Row == 0) continue;

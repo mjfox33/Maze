@@ -49,7 +49,7 @@ namespace Maze
             }
         }
 
-        public override Image ToImage(int cellSize = 1, bool useBackgrounds = false)
+        public override Image ToImage(int cellSize = 10, CellBorderWidth cellBorderWidth = CellBorderWidth.Normal, bool useBackgrounds = false)
         {
             var halfWidth = cellSize / 2.0;
             var height = cellSize * Math.Sqrt(3) / 2.0;
@@ -65,7 +65,8 @@ namespace Maze
                 var imageSize = new Rectangle(0, 0, imageWidth + 1, imageHeight + 1);
                 graph.FillRectangle(Brushes.White, imageSize);
 
-                var pen = new Pen(Color.Black, 4);
+                var penSize = cellSize / 10;
+                var pen = new Pen(Color.Black, penSize);
                 foreach (var cell in EachCell)
                 {
                     var xCenter = halfWidth + cell.Column * halfWidth;

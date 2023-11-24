@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Maze
 {
+    /// <summary>
+    /// Abstract Class representing one cell on a 2D Grid
+    /// </summary>
+    /// <typeparam name="T">T will be a specific type of Cell</typeparam>
     public abstract class Cell<T>
     {
         protected Cell() { }
@@ -54,12 +58,22 @@ namespace Maze
             }
         }
 
+        /// <summary>
+        /// Links a Cell to this Cell
+        /// </summary>
+        /// <param name="cell"></param>
+        /// <param name="bidirectionally"></param>
         public virtual void Link(Cell<T> cell, bool bidirectionally = true)
         {
             Links.Add(cell);
             if (bidirectionally) cell.Link(this, false);
         }
 
+        /// <summary>
+        /// Unlinks a Cell from this Cell
+        /// </summary>
+        /// <param name="cell"></param>
+        /// <param name="bidirectionally"></param>
         public virtual void Unlink(Cell<T> cell, bool bidirectionally = true)
         {
             Links.Remove(cell);

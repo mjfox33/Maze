@@ -74,7 +74,7 @@ namespace Maze
             return sb.ToString();
         }
 
-        public override Image ToImage(int cellSize = 1, bool useBackgrounds = false)
+        public override Image ToImage(int cellSize = 10, CellBorderWidth cellBorderWidth = CellBorderWidth.Normal, bool useBackgrounds = false)
         {
             var width = cellSize * Columns;
             var height = cellSize * Rows;
@@ -100,7 +100,9 @@ namespace Maze
                     }
                 }
 
-                var pen = new Pen(Color.Black, 4);
+
+                var penWidth = cellSize / 10;
+                var pen = new Pen(Color.Black, penWidth);
                 foreach (var cell in EachCell)
                 {
                     if (cell == null) continue;
