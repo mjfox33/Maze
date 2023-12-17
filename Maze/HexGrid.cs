@@ -50,6 +50,11 @@ namespace Maze
 
         public override Image ToImage(int cellSize = 10, CellBorderWidth cellBorderWidth = CellBorderWidth.Normal, bool useBackgrounds = false)
         {
+            if (useBackgrounds && Distances == null)
+            {
+                _fillDistancesIfNull();
+            }
+
             var aSize = cellSize / 2.0;
             var bSize = cellSize * Math.Sqrt(3) / 2.0;
             var width = cellSize * 2;

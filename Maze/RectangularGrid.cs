@@ -76,6 +76,11 @@ namespace Maze
 
         public override Image ToImage(int cellSize = 10, CellBorderWidth cellBorderWidth = CellBorderWidth.Normal, bool useBackgrounds = false)
         {
+            if (useBackgrounds && Distances == null)
+            {
+                _fillDistancesIfNull();
+            }
+
             var width = cellSize * Columns;
             var height = cellSize * Rows;
             var img = new Bitmap(width + 1, height + 1);

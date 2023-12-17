@@ -37,13 +37,37 @@ namespace Maze
 
         private int _maximumDistance;
 
+        protected void _fillDistancesIfNull()
+        {
+            if (Distances != null) return;
+
+            var randomCell = RandomCell;
+            Distances = randomCell.Distances;
+        }
+
+
+        // todo: test new background color functions
+        // todo: select a random start cell and calculate distances if the user requests an image and didnt do that
+        public Color? BackgroundColorForCell(Cell<T> cell, Color? farthestColor, Color? startColor)
+        {
+            var zeroCellColor = startColor ?? Color.White;
+            var lastCellColor = farthestColor ?? Color.Blue;
+            var distance = Distances[cell];
+            var factor = (double)distance / _maximumDistance;
+            var red = zeroCellColor.R + (int)(factor * (lastCellColor.R - zeroCellColor.R));
+            var green = zeroCellColor.G + (int)(factor * (lastCellColor.G - zeroCellColor.G));
+            var blue = zeroCellColor.B + (int)(factor * (lastCellColor.B - zeroCellColor.B));
+            return Color.FromArgb(red, green, blue);
+        }
+
+        public Color? BackgroundColorForCell(Cell<T> cell, Color? farthestColor)
+        {
+            return BackgroundColorForCell(cell, farthestColor, null);
+        }
+
         public Color? BackgroundColorForCell(Cell<T> cell)
         {
-            var distance = Distances[cell];
-            var intensity = Convert.ToDouble(_maximumDistance - distance) / _maximumDistance;
-            var dark = (int)Math.Ceiling(255 * intensity);
-            var light = (int)Math.Ceiling(128 + 127 * intensity);
-            return Color.FromArgb(dark, dark, light);
+            return BackgroundColorForCell(cell, null, null);
         }
 
 
@@ -76,6 +100,7 @@ namespace Maze
             }
         }
 
+        // todo: this is trying to do too much. need a function to just return an image and add a background if needed
         public abstract Image ToImage(int cellSize = 10, CellBorderWidth cellBorderWidth = CellBorderWidth.Normal, bool useBackgrounds = false);
 
         public enum CellBorderWidth
